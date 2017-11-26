@@ -246,6 +246,31 @@ func (c *Collector) SetDebugger(d debug.Debugger) {
 	c.debugger = d
 }
 
+// SetVisitedURLs sets initial visited urls
+func (c *Collector) SetVisitedURLs(urls []string) {
+	for _, u := range urls {
+		h := fnv.New64a()
+		h.Write([]byte(u))
+		uHash := h.Sum64()
+
+		c.lock.Lock()
+		c.visitedURLs[uHash] = true
+		c.lock.Unlock()
+	}
+}
+
+// IsVisited checks visited urls
+func (c *Collector) IsVisited(u string) bool {
+	h := fnv.New64a()
+	h.Write([]byte(u))
+	uHash := h.Sum64()
+
+	c.lock.RLock()
+	defer c.lock.RUnlock()
+
+	return c.visitedURLs[uHash]
+}
+
 func (c *Collector) scrape(u, method string, depth int, requestData io.Reader, ctx *Context, hdr http.Header) error {
 	c.wg.Add(1)
 	defer c.wg.Done()

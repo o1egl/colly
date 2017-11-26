@@ -1,0 +1,23 @@
+[[constraint]]
+  name = "github.com/PuerkitoBio/goquery"
+  version = "1.1.0"
+
+[[constraint]]
+  name = "github.com/gobwas/glob"
+  version = "0.2.2"
+
+[[constraint]]
+  name = "github.com/jawher/mow.cli"
+  version = "1.0.3"
+
+[[constraint]]
+  name = "github.com/kennygrant/sanitize"
+  version = "1.2.3"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/temoto/robotstxt"
+
+[[constraint]]
+  name = "google.golang.org/appengine"
+  version = "1.0.0"
